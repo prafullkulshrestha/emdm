@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    hibernate:
+      # possible values: validate | update | create | create-drop
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: pkulshrestha
+    driver-class-name: org.postgresql.Driver
