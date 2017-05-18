@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,7 +28,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 public class MasterAttribute extends BaseEntity implements java.io.Serializable {
 
 
-   private int attrSkey;
+   private Long attrSkey;
    private String masterAttrName;
    private String masterAttrDisplayName;
    private String masterAttrType;
@@ -43,7 +45,7 @@ public class MasterAttribute extends BaseEntity implements java.io.Serializable 
     }
 
 	
-    public MasterAttribute(int attrSkey, Date effStartDt, Date effEndDt, Date createTs, String createUser) {
+    public MasterAttribute(Long attrSkey, Date effStartDt, Date effEndDt, Date createTs, String createUser) {
         this.attrSkey = attrSkey;
         this.effStartDt = effStartDt;
         this.effEndDt = effEndDt;
@@ -51,7 +53,7 @@ public class MasterAttribute extends BaseEntity implements java.io.Serializable 
         this.createUser = createUser;
     }
 
-    public MasterAttribute(int attrSkey, String masterAttrName, String masterAttrDisplayName, String masterAttrType, Date effStartDt, Date effEndDt, Date createTs, String createUser, Date updateTs, String updateUser, Set<ClassAttributeMap> classAttributeMaps, Set<MasterAttributeValue> masterAttributeValues) {
+    public MasterAttribute(Long attrSkey, String masterAttrName, String masterAttrDisplayName, String masterAttrType, Date effStartDt, Date effEndDt, Date createTs, String createUser, Date updateTs, String updateUser, Set<ClassAttributeMap> classAttributeMaps, Set<MasterAttributeValue> masterAttributeValues) {
        this.attrSkey = attrSkey;
        this.masterAttrName = masterAttrName;
        this.masterAttrDisplayName = masterAttrDisplayName;
@@ -68,13 +70,13 @@ public class MasterAttribute extends BaseEntity implements java.io.Serializable 
    
      @Id 
 
-    
+     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="attr_skey", unique=true, nullable=false)
-    public int getAttrSkey() {
+    public Long getAttrSkey() {
         return this.attrSkey;
     }
     
-    public void setAttrSkey(int attrSkey) {
+    public void setAttrSkey(Long attrSkey) {
         this.attrSkey = attrSkey;
     }
 
@@ -228,8 +230,6 @@ public class MasterAttribute extends BaseEntity implements java.io.Serializable 
 					.append( createUser ,castOther.createUser )
 					.append( updateTs ,castOther.updateTs )
 					.append( updateUser ,castOther.updateUser )
-					.append( classAttributeMaps ,castOther.classAttributeMaps )
-					.append( masterAttributeValues ,castOther.masterAttributeValues )
 					.isEquals();
    }
    
@@ -248,8 +248,6 @@ public class MasterAttribute extends BaseEntity implements java.io.Serializable 
 					.append( createUser)
 					.append( updateTs)
 					.append( updateUser)
-					.append( classAttributeMaps)
-					.append( masterAttributeValues)
 					.toHashCode();
    }   
 

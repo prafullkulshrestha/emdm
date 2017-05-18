@@ -4,6 +4,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,7 +27,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 public class ClassAttributeValueMap extends BaseEntity implements java.io.Serializable {
 
 
-   private int classAttrValSkey;
+   private Long classAttrValSkey;
    private ClassAttributeMap classAttributeMap;
    private MasterAttributeValue masterAttributeValue;
    private boolean isDefaultVal;
@@ -40,7 +42,7 @@ public class ClassAttributeValueMap extends BaseEntity implements java.io.Serial
     }
 
 	
-    public ClassAttributeValueMap(int classAttrValSkey, ClassAttributeMap classAttributeMap, MasterAttributeValue masterAttributeValue, boolean isDefaultVal, Date effStartDt, Date effEndDt, Date createTs, String createUser) {
+    public ClassAttributeValueMap(Long classAttrValSkey, ClassAttributeMap classAttributeMap, MasterAttributeValue masterAttributeValue, boolean isDefaultVal, Date effStartDt, Date effEndDt, Date createTs, String createUser) {
         this.classAttrValSkey = classAttrValSkey;
         this.classAttributeMap = classAttributeMap;
         this.masterAttributeValue = masterAttributeValue;
@@ -51,7 +53,7 @@ public class ClassAttributeValueMap extends BaseEntity implements java.io.Serial
         this.createUser = createUser;
     }
 
-    public ClassAttributeValueMap(int classAttrValSkey, ClassAttributeMap classAttributeMap, MasterAttributeValue masterAttributeValue, boolean isDefaultVal, Date effStartDt, Date effEndDt, Date createTs, String createUser, Date updateTs, String updateUser) {
+    public ClassAttributeValueMap(Long classAttrValSkey, ClassAttributeMap classAttributeMap, MasterAttributeValue masterAttributeValue, boolean isDefaultVal, Date effStartDt, Date effEndDt, Date createTs, String createUser, Date updateTs, String updateUser) {
        this.classAttrValSkey = classAttrValSkey;
        this.classAttributeMap = classAttributeMap;
        this.masterAttributeValue = masterAttributeValue;
@@ -66,13 +68,13 @@ public class ClassAttributeValueMap extends BaseEntity implements java.io.Serial
    
      @Id 
 
-    
+     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="class_attr_val_skey", unique=true, nullable=false)
-    public int getClassAttrValSkey() {
+    public Long getClassAttrValSkey() {
         return this.classAttrValSkey;
     }
     
-    public void setClassAttrValSkey(int classAttrValSkey) {
+    public void setClassAttrValSkey(Long classAttrValSkey) {
         this.classAttrValSkey = classAttrValSkey;
     }
 
@@ -86,7 +88,7 @@ public class ClassAttributeValueMap extends BaseEntity implements java.io.Serial
         this.classAttributeMap = classAttributeMap;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="master_attr_val_skey", nullable=false)
     public MasterAttributeValue getMasterAttributeValue() {
         return this.masterAttributeValue;
@@ -197,7 +199,6 @@ public class ClassAttributeValueMap extends BaseEntity implements java.io.Serial
 		 ClassAttributeValueMap castOther = ( ClassAttributeValueMap ) other; 
          
 		 return new EqualsBuilder().append( classAttrValSkey ,castOther.classAttrValSkey )
-					.append( classAttributeMap ,castOther.classAttributeMap )
 					.append( masterAttributeValue ,castOther.masterAttributeValue )
 					.append( isDefaultVal ,castOther.isDefaultVal )
 					.append( effStartDt ,castOther.effStartDt )
@@ -215,7 +216,6 @@ public class ClassAttributeValueMap extends BaseEntity implements java.io.Serial
    public int hashCode() {
 		          
          return new HashCodeBuilder().append( classAttrValSkey)
-					.append( classAttributeMap)
 					.append( masterAttributeValue)
 					.append( isDefaultVal)
 					.append( effStartDt)

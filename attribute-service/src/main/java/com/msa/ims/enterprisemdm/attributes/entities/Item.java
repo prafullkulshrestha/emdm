@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,7 +26,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class Item extends BaseEntity implements java.io.Serializable {
 
 
-   private int itemSkey;
+   private Long itemSkey;
    private String industrySector;
    private String industrySegment;
    private String industryClass;
@@ -43,7 +45,7 @@ public class Item extends BaseEntity implements java.io.Serializable {
     }
 
 	
-    public Item(int itemSkey, String industrySector, String industrySegment, String industryClass, String upc, String shortDescription, String longDesctiption, String status, String reasonForChange, Date createTs, String createUser) {
+    public Item(Long itemSkey, String industrySector, String industrySegment, String industryClass, String upc, String shortDescription, String longDesctiption, String status, String reasonForChange, Date createTs, String createUser) {
         this.itemSkey = itemSkey;
         this.industrySector = industrySector;
         this.industrySegment = industrySegment;
@@ -57,7 +59,7 @@ public class Item extends BaseEntity implements java.io.Serializable {
         this.createUser = createUser;
     }
 
-    public Item(int itemSkey, String industrySector, String industrySegment, String industryClass, String upc, String shortDescription, String longDesctiption, String status, String reasonForChange, Date createTs, String createUser, Date updateTs, String updateUser, Serializable atributes) {
+    public Item(Long itemSkey, String industrySector, String industrySegment, String industryClass, String upc, String shortDescription, String longDesctiption, String status, String reasonForChange, Date createTs, String createUser, Date updateTs, String updateUser, Serializable atributes) {
        this.itemSkey = itemSkey;
        this.industrySector = industrySector;
        this.industrySegment = industrySegment;
@@ -76,13 +78,13 @@ public class Item extends BaseEntity implements java.io.Serializable {
    
      @Id 
 
-    
+     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="item_skey", unique=true, nullable=false)
-    public int getItemSkey() {
+    public Long getItemSkey() {
         return this.itemSkey;
     }
     
-    public void setItemSkey(int itemSkey) {
+    public void setItemSkey(Long itemSkey) {
         this.itemSkey = itemSkey;
     }
 

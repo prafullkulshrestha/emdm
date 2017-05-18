@@ -3,30 +3,32 @@ package com.msa.ims.enterprisemdm.attributes.entities;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 /**
  * @author
  */
 @Entity
 @Table(name="class"
-    ,schema="public"
 )
 public class Class extends BaseEntity implements java.io.Serializable {
 
 
-   private int classSkey;
+   private Long classSkey;
    private String industrySector;
    private String industrySegment;
    private String industryClass;
@@ -42,7 +44,7 @@ public class Class extends BaseEntity implements java.io.Serializable {
     }
 
 	
-    public Class(int classSkey, String industrySector, String industrySegment, String industryClass, Date effStartDt, Date effEndDt, Date createTs, String createUser) {
+    public Class(Long classSkey, String industrySector, String industrySegment, String industryClass, Date effStartDt, Date effEndDt, Date createTs, String createUser) {
         this.classSkey = classSkey;
         this.industrySector = industrySector;
         this.industrySegment = industrySegment;
@@ -53,7 +55,7 @@ public class Class extends BaseEntity implements java.io.Serializable {
         this.createUser = createUser;
     }
 
-    public Class(int classSkey, String industrySector, String industrySegment, String industryClass, Date effStartDt, Date effEndDt, Date createTs, String createUser, Date updateTs, String updateUser, Set<ClassAttributeMap> classAttributeMaps) {
+    public Class(Long classSkey, String industrySector, String industrySegment, String industryClass, Date effStartDt, Date effEndDt, Date createTs, String createUser, Date updateTs, String updateUser, Set<ClassAttributeMap> classAttributeMaps) {
        this.classSkey = classSkey;
        this.industrySector = industrySector;
        this.industrySegment = industrySegment;
@@ -68,14 +70,13 @@ public class Class extends BaseEntity implements java.io.Serializable {
     }
    
      @Id 
-
-    
+     @GeneratedValue(strategy=GenerationType.IDENTITY)    
     @Column(name="class_skey", unique=true, nullable=false)
-    public int getClassSkey() {
+    public Long getClassSkey() {
         return this.classSkey;
     }
     
-    public void setClassSkey(int classSkey) {
+    public void setClassSkey(Long classSkey) {
         this.classSkey = classSkey;
     }
 
@@ -169,7 +170,7 @@ public class Class extends BaseEntity implements java.io.Serializable {
         this.updateUser = updateUser;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="classIns")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="classIns")
     public Set<ClassAttributeMap> getClassAttributeMaps() {
         return this.classAttributeMaps;
     }
@@ -219,7 +220,6 @@ public class Class extends BaseEntity implements java.io.Serializable {
 					.append( createUser ,castOther.createUser )
 					.append( updateTs ,castOther.updateTs )
 					.append( updateUser ,castOther.updateUser )
-					.append( classAttributeMaps ,castOther.classAttributeMaps )
 					.isEquals();
    }
    
@@ -238,7 +238,6 @@ public class Class extends BaseEntity implements java.io.Serializable {
 					.append( createUser)
 					.append( updateTs)
 					.append( updateUser)
-					.append( classAttributeMaps)
 					.toHashCode();
    }   
 

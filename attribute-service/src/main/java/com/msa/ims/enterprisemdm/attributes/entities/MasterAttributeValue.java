@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,7 +31,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class MasterAttributeValue extends BaseEntity implements java.io.Serializable {
 
 
-   private int masterAttrValSkey;
+   private Long masterAttrValSkey;
    private MasterAttribute masterAttribute;
    private String masterAttrValCode;
    private String masterAttrValShortName;
@@ -46,7 +48,7 @@ public class MasterAttributeValue extends BaseEntity implements java.io.Serializ
     }
 
 	
-    public MasterAttributeValue(int masterAttrValSkey, MasterAttribute masterAttribute, String masterAttrValCode, Date effStartDt, Date effEndDt, Date createTs, String createUser) {
+    public MasterAttributeValue(Long masterAttrValSkey, MasterAttribute masterAttribute, String masterAttrValCode, Date effStartDt, Date effEndDt, Date createTs, String createUser) {
         this.masterAttrValSkey = masterAttrValSkey;
         this.masterAttribute = masterAttribute;
         this.masterAttrValCode = masterAttrValCode;
@@ -56,7 +58,7 @@ public class MasterAttributeValue extends BaseEntity implements java.io.Serializ
         this.createUser = createUser;
     }
 
-    public MasterAttributeValue(int masterAttrValSkey, MasterAttribute masterAttribute, String masterAttrValCode, String masterAttrValShortName, String masterAttrValLongName, Date effStartDt, Date effEndDt, Date createTs, String createUser, Date updateTs, String updateUser, Set<ClassAttributeValueMap> classAttributeValueMaps) {
+    public MasterAttributeValue(Long masterAttrValSkey, MasterAttribute masterAttribute, String masterAttrValCode, String masterAttrValShortName, String masterAttrValLongName, Date effStartDt, Date effEndDt, Date createTs, String createUser, Date updateTs, String updateUser, Set<ClassAttributeValueMap> classAttributeValueMaps) {
        this.masterAttrValSkey = masterAttrValSkey;
        this.masterAttribute = masterAttribute;
        this.masterAttrValCode = masterAttrValCode;
@@ -73,13 +75,13 @@ public class MasterAttributeValue extends BaseEntity implements java.io.Serializ
    
      @Id 
 
-    
+     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="master_attr_val_skey", unique=true, nullable=false)
-    public int getMasterAttrValSkey() {
+    public Long getMasterAttrValSkey() {
         return this.masterAttrValSkey;
     }
     
-    public void setMasterAttrValSkey(int masterAttrValSkey) {
+    public void setMasterAttrValSkey(Long masterAttrValSkey) {
         this.masterAttrValSkey = masterAttrValSkey;
     }
 
@@ -235,7 +237,6 @@ public class MasterAttributeValue extends BaseEntity implements java.io.Serializ
 					.append( createUser ,castOther.createUser )
 					.append( updateTs ,castOther.updateTs )
 					.append( updateUser ,castOther.updateUser )
-					.append( classAttributeValueMaps ,castOther.classAttributeValueMaps )
 					.isEquals();
    }
    
@@ -255,7 +256,6 @@ public class MasterAttributeValue extends BaseEntity implements java.io.Serializ
 					.append( createUser)
 					.append( updateTs)
 					.append( updateUser)
-					.append( classAttributeValueMaps)
 					.toHashCode();
    }   
 

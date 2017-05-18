@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,7 +30,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 public class ClassAttributeMap extends BaseEntity implements java.io.Serializable {
 
 
-   private int classAttrSkey;
+   private Long classAttrSkey;
    private Class classIns;
    private MasterAttribute masterAttribute;
    private int masterAttrDisplaySeq;
@@ -46,7 +48,7 @@ public class ClassAttributeMap extends BaseEntity implements java.io.Serializabl
     }
 
 	
-    public ClassAttributeMap(int classAttrSkey, Class classIns, MasterAttribute masterAttribute, int masterAttrDisplaySeq, String masterAttrBusImp, Date effStartDt, Date effEndDt, Date createTs, String createUser) {
+    public ClassAttributeMap(Long classAttrSkey, Class classIns, MasterAttribute masterAttribute, int masterAttrDisplaySeq, String masterAttrBusImp, Date effStartDt, Date effEndDt, Date createTs, String createUser) {
         this.classAttrSkey = classAttrSkey;
         this.classIns = classIns;
         this.masterAttribute = masterAttribute;
@@ -58,7 +60,7 @@ public class ClassAttributeMap extends BaseEntity implements java.io.Serializabl
         this.createUser = createUser;
     }
 
-    public ClassAttributeMap(int classAttrSkey, Class classIns, MasterAttribute masterAttribute, int masterAttrDisplaySeq, Integer masterAttrDescSeq, String masterAttrBusImp, Date effStartDt, Date effEndDt, Date createTs, String createUser, Date updateTs, String updateUser, Set<ClassAttributeValueMap> classAttributeValueMaps) {
+    public ClassAttributeMap(Long classAttrSkey, Class classIns, MasterAttribute masterAttribute, int masterAttrDisplaySeq, Integer masterAttrDescSeq, String masterAttrBusImp, Date effStartDt, Date effEndDt, Date createTs, String createUser, Date updateTs, String updateUser, Set<ClassAttributeValueMap> classAttributeValueMaps) {
        this.classAttrSkey = classAttrSkey;
        this.classIns = classIns;
        this.masterAttribute = masterAttribute;
@@ -75,14 +77,13 @@ public class ClassAttributeMap extends BaseEntity implements java.io.Serializabl
     }
    
      @Id 
-
-    
+     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="class_attr_skey", unique=true, nullable=false)
-    public int getClassAttrSkey() {
+    public Long getClassAttrSkey() {
         return this.classAttrSkey;
     }
     
-    public void setClassAttrSkey(int classAttrSkey) {
+    public void setClassAttrSkey(Long classAttrSkey) {
         this.classAttrSkey = classAttrSkey;
     }
 
@@ -96,7 +97,7 @@ public class ClassAttributeMap extends BaseEntity implements java.io.Serializabl
         this.classIns = classIns;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="attr_skey", nullable=false)
     public MasterAttribute getMasterAttribute() {
         return this.masterAttribute;
@@ -196,7 +197,7 @@ public class ClassAttributeMap extends BaseEntity implements java.io.Serializabl
         this.updateUser = updateUser;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="classAttributeMap")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="classAttributeMap")
     public Set<ClassAttributeValueMap> getClassAttributeValueMaps() {
         return this.classAttributeValueMaps;
     }
