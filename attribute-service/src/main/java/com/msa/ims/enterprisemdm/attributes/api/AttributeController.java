@@ -4,7 +4,6 @@
 package com.msa.ims.enterprisemdm.attributes.api;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.msa.ims.enterprisemdm.attributes.dto.ClassAttributeMapDTO;
-import com.msa.ims.enterprisemdm.attributes.dto.PrimaryAttributeByClassDTO;
 import com.msa.ims.enterprisemdm.attributes.entities.Class;
 import com.msa.ims.enterprisemdm.attributes.services.AttributeService;
 
