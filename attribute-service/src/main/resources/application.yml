@@ -13,3 +13,14 @@ spring:
     username: postgres
     password: pkulshrestha
     driver-class-name: org.postgresql.Driver
+ 
+logging:
+  level:
+    root: fatal
+    com.msa: debug
+    org.springframework: ERROR
+    org.hibernate: ERROR
+  file: /tmp/config/logs/attributes-service.log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"

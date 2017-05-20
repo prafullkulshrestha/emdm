@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,7 @@ import com.msa.ims.enterprisemdm.attributes.services.AttributeService;
 public class AttributeController {
 
 	private final AttributeService attributeService;
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Inject
 	public AttributeController(AttributeService attributeService) {
@@ -40,6 +43,7 @@ public class AttributeController {
 	@RequestMapping(method = RequestMethod.GET, value = "/class/{industryClassName}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<List<ClassAttributeMapDTO>>> getProductListBySearchAndSortCriteria(@PathVariable("industryClassName") final String industryClassName) throws Exception {
+		logger.debug(String.format("Request received for getting attributes for the industry class with the classname: %s", industryClassName));
 		List<Class> classIns = attributeService.getByIndustryClassName(industryClassName);
 		List<List<ClassAttributeMapDTO>> classAttributeMapDTOsList = new ArrayList<>();
 		classIns.stream().forEach(claaz -> {
