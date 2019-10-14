@@ -53,6 +53,5 @@
 * There might be other ways also to perform the read and the match operations.
 * Exception handling can be introduced to the project if required.
 * More test cases could be added for testing the various other classes and methods to increase the code coverage.
-* I've added only the happy path test cases and not focused on increasing the code coverage due to the time and health constraints. You can see my following project which proves that I can increase the coverage
-:
+* I've added only the happy path test cases and not focused on increasing the code coverage due to the time and health constraints. You can see my following project which proves that I can increase the coverage and implement the exception handling:
 https://github.com/prafullkulshrestha/emdm/tree/master/emdm-api
