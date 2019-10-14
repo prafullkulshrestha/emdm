@@ -21,12 +21,6 @@
  * TF stands for "Term Frequency". The number indicates the frequency of the word appearing in a document.
  * IDF stands for "Inverse Document Frequency". This means, how common or rare a word is in the entire document set. The closer it is to 0,      	the more common a word is. This metric can be calculated by taking the total number of documents, dividing it by the number of documents 	that contain a word, and calculating the logarithm. 
 
-## Assumptions
-* The application is not going to run in a cluster mode.
-* One Organization is associated with more than one developers
-* One developer is associated with one organization only
-* Once configured the minutely rate limit will apply to all the apis uniformly.
-
 ## Prerequisite
 * Install JDK 1.8.
 * Download STS to import and do further development on it
